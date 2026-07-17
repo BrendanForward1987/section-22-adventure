@@ -405,10 +405,10 @@ export default function Home() {
       <header className="site-header">
         <button className="brand" onClick={goHome} aria-label="Return to the Section 22 home screen">
           <span className="brand-mark">22</span>
-          <span><b>OUR POWER</b><small>Section 22 · Plain language</small></span>
+          <span className="brand-copy"><b>OUR POWER</b><small>Section 22 · Plain language</small></span>
         </button>
         <div className="header-actions">
-          <span className="language-note">EN <i>·</i> CREE COMING NEXT</span>
+          <span className="language-note"><b>EN</b><i>·</i><span>CREE COMING NEXT</span></span>
           <button className="about-button" onClick={() => setShowAbout(true)}>What is Section 22?</button>
         </div>
       </header>
