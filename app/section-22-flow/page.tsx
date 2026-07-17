@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- full-page navigation avoids a Vinext RSC transition failure in this runtime */
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type FlowStep = {
   number: string;
@@ -12,7 +13,6 @@ type FlowStep = {
   voice: string;
   questions: string[];
   artLabel: string;
-  artPosition: string;
   accent: "yellow" | "orange" | "blue" | "green";
 };
 
@@ -26,7 +26,6 @@ const flowSteps: FlowStep[] = [
     voice: "Community members can ask for clear maps, timelines, access plans, and a description of the whole project—not only one small work site.",
     questions: ["Where is it?", "What work is included?", "Who uses this place and when?"],
     artLabel: "A project proposal beside a map of Eeyou Istchee",
-    artPosition: "0% 0%",
     accent: "yellow",
   },
   {
@@ -38,7 +37,6 @@ const flowSteps: FlowStep[] = [
     voice: "Knowledge about sensitive places, connected activities, and seasonal use can help show why a proposal needs closer attention.",
     questions: ["What process applies?", "Are related activities being considered?", "Who decides the next step?"],
     artLabel: "A community member studying a project map",
-    artPosition: "50% 0%",
     accent: "blue",
   },
   {
@@ -50,7 +48,6 @@ const flowSteps: FlowStep[] = [
     voice: "People who know the land can identify missing questions before assumptions harden into a project design.",
     questions: ["What could change?", "How far could effects travel?", "What is already affecting the area?"],
     artLabel: "Field notes, water, wildlife tracks and route maps",
-    artPosition: "100% 0%",
     accent: "orange",
   },
   {
@@ -62,7 +59,6 @@ const flowSteps: FlowStep[] = [
     voice: "Land users, youth, Elders, families, and community organizations can bring forward places, patterns, concerns, and alternatives.",
     questions: ["Whose knowledge is missing?", "How will it be respected?", "What seasons must be understood?"],
     artLabel: "Land users and Elders sharing knowledge around a map",
-    artPosition: "0% 100%",
     accent: "green",
   },
   {
@@ -74,7 +70,6 @@ const flowSteps: FlowStep[] = [
     voice: "At meetings or hearings, people can describe effects in their own terms, ask direct questions, and request clear responses.",
     questions: ["Were concerns answered?", "Are alternatives realistic?", "Is more information needed?"],
     artLabel: "A community hearing with people speaking and listening",
-    artPosition: "50% 100%",
     accent: "yellow",
   },
   {
@@ -86,7 +81,6 @@ const flowSteps: FlowStep[] = [
     voice: "Community participation still matters after a decision. Commitments are stronger when responsibilities, reporting, and responses are clear.",
     questions: ["What must change?", "Who checks the commitments?", "What happens if impacts are different?"],
     artLabel: "A revised project route with water monitoring and community follow-up",
-    artPosition: "100% 100%",
     accent: "orange",
   },
 ];
@@ -128,11 +122,18 @@ export default function Section22FlowPage() {
       </section>
 
       <section className="flow-map" aria-label="Six-stage Section 22 pathway">
+        <svg className="flow-lines" viewBox="0 0 1200 930" preserveAspectRatio="none" aria-hidden="true">
+          <path className="flow-line-accent" d="M150 196 C285 58 385 356 552 278 C704 207 782 76 987 177 C1094 230 1100 466 978 569 C825 699 752 789 589 737 C433 686 347 529 174 627" />
+          <path className="flow-line-ink" d="M157 188 C282 72 391 342 558 270 C716 202 785 88 981 186 C1081 236 1087 458 970 562 C825 691 746 776 594 727 C438 678 348 518 180 619" />
+          <path className="flow-line-sketch" d="M164 205 C301 88 396 367 565 288 C722 216 798 105 995 198 C1088 242 1098 451 985 579 C851 730 753 802 580 747 C419 697 336 548 167 643" />
+        </svg>
         <div className="flow-spine" aria-hidden="true"></div>
         {flowSteps.map((step, index) => (
-          <button className={`flow-step flow-step-${step.accent}`} key={step.number} onClick={() => setOpenStep(index)} aria-haspopup="dialog">
+          <button className={`flow-step flow-card-${index + 1} flow-step-${step.accent}`} key={step.number} onClick={() => setOpenStep(index)} aria-haspopup="dialog">
             <span className="flow-node">{step.number}</span>
-            <span className="flow-step-art" role="img" aria-label={step.artLabel} style={{ backgroundPosition: step.artPosition }}></span>
+            <span className={`flow-step-art flow-art-${index + 1}`}>
+              <Image src="/images/section22-flow-vignettes.png" alt={step.artLabel} width={1636} height={961} unoptimized sizes="(max-width: 900px) 300vw, 93vw" />
+            </span>
             <span className="flow-step-copy">
               <span className="flow-stage">{step.stage}</span>
               <strong>{step.title}</strong>
