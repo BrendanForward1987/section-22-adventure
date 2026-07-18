@@ -102,10 +102,13 @@ export default function Section22FlowPage() {
       <header className="site-header">
         <a className="brand" href="/" aria-label="Return to the Section 22 home screen">
           <span className="brand-mark">22</span>
-          <span className="brand-copy"><b>OUR POWER</b><small>Section 22 · Plain language</small></span>
+          <span className="brand-copy"><b>OUR POWER</b><small>Your voice matters. Projects can change because of you.</small></span>
         </a>
         <div className="header-actions">
-          <span className="language-note"><b>EN</b><i>·</i><span>CREE COMING NEXT</span></span>
+          <span className="language-toggle" role="group" aria-label="Language availability">
+            <span className="language-choice is-active"><b>EN</b><small>English</small></span>
+            <span className="language-choice is-coming"><b>CREE</b><small>Coming next</small></span>
+          </span>
           <a className="about-button flow-home-link" href="/">Explore scenarios</a>
         </div>
       </header>
